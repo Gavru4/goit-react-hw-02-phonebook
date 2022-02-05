@@ -1,3 +1,6 @@
+import propTypes from "prop-types";
+import PropTypes from "prop-types";
+
 const Section = ({ children, title }) => {
   return (
     <section>
@@ -7,3 +10,8 @@ const Section = ({ children, title }) => {
   );
 };
 export default Section;
+
+Section.propTypes = {
+  // children: PropTypes.arrayOf(propTypes.object),
+  title: PropTypes.string.isRequired,
+};

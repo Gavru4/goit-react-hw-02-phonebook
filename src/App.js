@@ -8,28 +8,19 @@ import ContactForm from "./Components/ContactForm/ContactForm";
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
+    contacts: [],
     filter: "",
   };
   heandlerInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
-  delateContackt = (data) => {
-    const index = this.state.contacts.findIndex((n) => {
-      console.log(n.id === data);
-    });
 
-    if (index !== -1) {
-      this.state.contacts.splice(index, 1);
-    }
-    console.log([data]);
-  };
+  removeContact = (id) =>
+    this.setState((prev) => ({
+      contacts: prev.contacts.filter((el) => el.id !== id),
+    }));
+
   onContactSubmit = (user) => {
     const array = this.state.contacts;
     for (const obj of array) {
@@ -68,7 +59,7 @@ class App extends Component {
           />
           <ContactList
             getFilterContacts={this.getFilterContacts}
-            delateContackt={this.delateContackt}
+            removeContact={this.removeContact}
           />
         </Section>
       </>

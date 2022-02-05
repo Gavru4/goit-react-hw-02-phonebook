@@ -1,13 +1,17 @@
-const ContactList = ({ getFilterContacts, delateContackt }) => {
+import PropTypes from "prop-types";
+import s from "./ContactList.module.css";
+
+const ContactList = ({ getFilterContacts, removeContact }) => {
   return (
-    <ul>
+    <ol className={s.list}>
       {getFilterContacts().map((el) => {
         return (
-          <li key={el.id}>
+          <li className={s.item} key={el.id}>
             {el.name}: {el.number}
             <button
+              className={s.btn}
               onClick={() => {
-                delateContackt(el.id);
+                removeContact(el.id);
               }}
             >
               Delate
@@ -15,8 +19,13 @@ const ContactList = ({ getFilterContacts, delateContackt }) => {
           </li>
         );
       })}
-    </ul>
+    </ol>
   );
 };
 
 export default ContactList;
+
+ContactList.propTypes = {
+  getFilterContacts: PropTypes.func.isRequired,
+  removeContact: PropTypes.func.isRequired,
+};
